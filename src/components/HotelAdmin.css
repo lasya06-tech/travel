@@ -1,0 +1,67 @@
+/* Dashboard main wrapper */
+.hotel-dashboard {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #e0f7fa;
+    min-height: 100vh;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    background-color: #0077cc;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    font-size: 24px;
+    color: #ffeb3b;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+  }
+  
+  .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links li a:hover {
+    color: #ffeb3b;
+  }
+  
+  /* 📸 Background image for dashboard content only */
+  .dashboard-content {
+    padding: 40px;
+    text-align: center;
+    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e'); /* You can replace this with your own image URL */
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    border-radius: 10px;
+    margin: 40px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Heading and paragraph text styles */
+  .dashboard-content h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-content p {
+    font-size: 18px;
+  }
+  
+
+  
+  
