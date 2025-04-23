@@ -1,0 +1,86 @@
+/* AddCab.css */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .add-cab {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-cab h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .add-cab form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .add-cab input,
+  .add-cab select,
+  .add-cab button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .add-cab input:focus,
+  .add-cab select:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+  
+  .add-cab input,
+  .add-cab select {
+    width: 100%;
+  }
+  
+  .add-cab button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-cab button:hover {
+    background-color: #45a049;
+  }
+  
+  .add-cab select {
+    background-color: #fff;
+    color: #555;
+  }
+  
+  .add-cab select option {
+    padding: 10px;
+  }
+  
+  .add-cab input::placeholder,
+  .add-cab select::placeholder {
+    color: #bbb;
+  }
+  
+  .add-cab input[type="text"] {
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .add-cab button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  

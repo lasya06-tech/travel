@@ -27,7 +27,7 @@ const Login = () => {
         navigate('/cabdashboard');
         break;
       case 'train':
-        navigate('/train-dashboard');
+        navigate('/traindashboard');
         break;
       default:
         navigate('/');

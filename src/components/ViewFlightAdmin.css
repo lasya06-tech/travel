@@ -1,0 +1,29 @@
+.view-flight-container {
+    padding: 20px;
+  }
+  
+  .flight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .flight-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .seat-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .seat-control button {
+    padding: 5px 10px;
+    font-size: 18px;
+  }
+  

@@ -18,7 +18,17 @@ const Header = () => {
   const handleCategoryClick = (category) => {
     if (category === 'Hotel') {
       navigate('/hotels');
-    } else {
+    }
+    else if (category === 'Flight') {
+      navigate('/flights');
+    }
+    else if (category === 'Cab') {
+      navigate('/cabs');
+    }
+    
+     
+
+    else {
       alert(`${category} page coming soon!`);
     }
   };

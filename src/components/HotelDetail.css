@@ -1,0 +1,73 @@
+/* HotelDetail.css */
+
+.detail-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .left-detail {
+    flex: 2;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .detail-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    height: 280px;
+    object-fit: cover;
+  }
+  
+  .left-detail h2 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+  }
+  
+  .left-detail p {
+    margin: 0.4rem 0;
+    color: #7f8c8d;
+    font-size: 1rem;
+  }
+  
+  .right-booking {
+    flex: 1;
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  }
+  
+  .right-booking h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+  }
+  
+  .right-booking p {
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    color: #16a085;
+    font-weight: bold;
+  }
+  
+  .book-button {
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .book-button:hover {
+    background-color: #2980b9;
+  }  

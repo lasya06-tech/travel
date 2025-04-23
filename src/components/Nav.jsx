@@ -11,6 +11,7 @@ const Nav = () => {
         <Link to="#">Contact Us</Link>
         <Link to="/login">Login</Link> {/* Link to /login route */}
         <Link to="/signup">Sign Up</Link> {/* Link to /signup route */}
+        <Link to="/profile">My Profile</Link>
       </div>
     </nav>
   );

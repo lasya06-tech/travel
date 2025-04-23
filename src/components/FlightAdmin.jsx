@@ -8,7 +8,8 @@ const FlightAdmin = () => {
       <nav className="navbar">
         <div className="logo">Travel</div>
         <ul className="nav-links">
-          <li><Link to="/hotel/addproduct">Add Flight</Link></li>
+          <li><Link to="/addflight">Add Flight</Link></li>
+          <li><Link to="/viewflights">View Flight</Link></li>
           <li><Link to="/hotel/viewproduct">Customer Feedback</Link></li>
         </ul>
       </nav>
