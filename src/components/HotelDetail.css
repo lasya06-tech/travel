@@ -1,73 +1,87 @@
 /* HotelDetail.css */
+.hotel-details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px; /* Increased gap between left and right sections */
+  margin: 40px;
+  padding: 20px;
+  background-color: #f5f5f5; /* Light background color */
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
 
-.detail-container {
-    max-width: 1000px;
-    margin: 2rem auto;
-    display: flex;
-    gap: 2rem;
-    padding: 1rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .left-detail {
-    flex: 2;
-    background-color: #fff;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .detail-image {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    height: 280px;
-    object-fit: cover;
-  }
-  
-  .left-detail h2 {
-    margin-bottom: 0.5rem;
-    color: #2c3e50;
-  }
-  
-  .left-detail p {
-    margin: 0.4rem 0;
-    color: #7f8c8d;
-    font-size: 1rem;
-  }
-  
-  .right-booking {
-    flex: 1;
-    background-color: #f8f9fa;
-    padding: 2rem;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
-  }
-  
-  .right-booking h3 {
-    color: #2c3e50;
-    font-size: 1.5rem;
-  }
-  
-  .right-booking p {
-    font-size: 1.1rem;
-    margin: 1rem 0;
-    color: #16a085;
-    font-weight: bold;
-  }
-  
-  .book-button {
-    padding: 0.7rem 2rem;
-    font-size: 1rem;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .book-button:hover {
-    background-color: #2980b9;
-  }  
+.hotel-image {
+  width: 100%;
+  max-width: 100%; /* Make sure image scales responsively */
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover; /* Ensures the image covers the container without distortion */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow around the image */
+  transition: transform 0.3s ease-in-out; /* Smooth zoom effect */
+}
+
+.hotel-image:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.hotel-info {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow to give depth */
+}
+
+.hotel-info h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+.hotel-info p {
+  font-size: 1.1rem;
+  margin: 8px 0;
+  color: #555;
+}
+
+select {
+  padding: 10px;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: #007BFF; /* Highlight border color on focus */
+}
+
+label {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.room-info {
+  margin-top: 15px;
+}
+
+.room-info p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+.hotel-bed-details {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow for right side */
+}

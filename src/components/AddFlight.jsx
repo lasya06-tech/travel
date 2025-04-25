@@ -1,108 +1,116 @@
 import React, { useState } from 'react';
-import './AddFlight.css';
-
+import { useNavigate } from 'react-router-dom';
 
 const AddFlight = ({ onAddFlight }) => {
-  const [flight, setFlight] = useState({
+  const [flightDetails, setFlightDetails] = useState({
     flightNumber: '',
     airline: '',
     from: '',
     to: '',
-    departureTime: '',
-    arrivalTime: '',
+    departureDateTime: '',
+    arrivalDateTime: '',
     duration: '',
     remarks: '',
-    availableSeats: ''  // Added availableSeats state
+    availableSeats: 0,
   });
+  
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFlight({ ...flight, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFlightDetails({
+      ...flightDetails,
+      [name]: value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Flight Added:", flight);
-    alert("Flight added successfully!");
-
-    // Call the onAddFlight prop to update the flight data in the parent component
-    onAddFlight(flight);
-
-    // Reset form fields after submitting
-    setFlight({
+    const formattedFlight = {
+      ...flightDetails,
+      departureTime: flightDetails.departureDateTime,
+      arrivalTime: flightDetails.arrivalDateTime,
+    };
+    onAddFlight(formattedFlight);
+    setFlightDetails({
       flightNumber: '',
       airline: '',
       from: '',
       to: '',
-      departureTime: '',
-      arrivalTime: '',
+      departureDateTime: '',
+      arrivalDateTime: '',
       duration: '',
       remarks: '',
-      availableSeats: ''  // Reset availableSeats field
+      availableSeats: 0,
     });
+    navigate('/viewflights');  // Navigate to view flights after adding
   };
 
   return (
-    <div className="flight-container">
-      <h2 className="flight-heading">Add New Flight</h2>
-      <form onSubmit={handleSubmit} className="flight-form">
-        <div className="input-group">
-          <label>Flight Number:</label>
-          <input type="text" name="flightNumber" value={flight.flightNumber} onChange={handleChange} required />
-        </div>
-
-        <div className="input-group">
-          <label>Airline:</label>
-          <input type="text" name="airline" value={flight.airline} onChange={handleChange} required />
-        </div>
-
-        <div className="input-group">
-          <label>From:</label>
-          <select name="from" value={flight.from} onChange={handleChange} required>
-            <option value="">Select Departure</option>
-            <option value="DEL">Delhi (DEL)</option>
-            <option value="BOM">Mumbai (BOM)</option>
-            <option value="BLR">Bangalore (BLR)</option>
-          </select>
-        </div>
-
-        <div className="input-group">
-          <label>To:</label>
-          <select name="to" value={flight.to} onChange={handleChange} required>
-            <option value="">Select Arrival</option>
-            <option value="DEL">Delhi (DEL)</option>
-            <option value="BOM">Mumbai (BOM)</option>
-            <option value="BLR">Bangalore (BLR)</option>
-          </select>
-        </div>
-
-        <div className="input-group">
-          <label>Departure Time:</label>
-          <input type="time" name="departureTime" value={flight.departureTime} onChange={handleChange} required />
-        </div>
-
-        <div className="input-group">
-          <label>Arrival Time:</label>
-          <input type="time" name="arrivalTime" value={flight.arrivalTime} onChange={handleChange} required />
-        </div>
-
-        <div className="input-group">
-          <label>Duration:</label>
-          <input type="text" name="duration" placeholder="e.g. 2h 30m" value={flight.duration} onChange={handleChange} required />
-        </div>
-
-        <div className="input-group">
-          <label>Remarks:</label>
-          <textarea name="remarks" value={flight.remarks} onChange={handleChange} rows="3" />
-        </div>
-
-        <div className="input-group">
-          <label>Available Seats:</label>
-          <input type="number" name="availableSeats" value={flight.availableSeats} onChange={handleChange} required min="0" />
-        </div>
-
-        <button type="submit" className="submit-button">Add Flight</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="flightNumber"
+        placeholder="Flight Number"
+        value={flightDetails.flightNumber}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="airline"
+        placeholder="Airline"
+        value={flightDetails.airline}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="from"
+        placeholder="From"
+        value={flightDetails.from}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="to"
+        placeholder="To"
+        value={flightDetails.to}
+        onChange={handleChange}
+      />
+      <input
+        type="date"
+        name="departureDateTime"
+        value={flightDetails.departureDateTime}
+        onChange={handleChange}
+      />
+      <input
+        type="date"
+        name="arrivalDateTime"
+        value={flightDetails.arrivalDateTime}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="duration"
+        placeholder="Duration"
+        value={flightDetails.duration}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="remarks"
+        placeholder="Remarks"
+        value={flightDetails.remarks}
+        onChange={handleChange}
+      />
+      <input
+        type="number"
+        name="availableSeats"
+        placeholder="Available Seats"
+        value={flightDetails.availableSeats}
+        onChange={handleChange}
+      />
+      <button type="submit">Add Flight</button>
+    </form>
   );
 };
 

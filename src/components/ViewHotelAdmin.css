@@ -1,53 +1,95 @@
-.view-hotel-container {
-    padding: 20px;
-    text-align: center;
+/* General body and container styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7fc;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header styling */
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Styling for the flight list */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #fff;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+li strong {
+  color: #2980b9;
+  font-size: 1.2em;
+}
+
+li p {
+  font-size: 1em;
+  margin: 5px 0;
+  line-height: 1.6;
+  color: #555;
+}
+
+li span {
+  font-weight: bold;
+  color: #16a085;
+}
+
+/* Styling for the 'No flights available' message */
+.no-flights {
+  text-align: center;
+  font-size: 1.5em;
+  color: #e74c3c;
+  margin-top: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
   }
-  
-  .hotel-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .hotel-card {
-    background: #fff;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  li {
     padding: 15px;
-    text-align: left;
   }
-  
-  .hotel-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
+
+  h2 {
+    font-size: 1.5em;
   }
-  
-  .room-control {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+  li {
+    font-size: 0.9em;
   }
-  
-  .room-control button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+
+  h2 {
+    font-size: 1.2em;
   }
-  
-  .room-control button:hover {
-    background-color: #0056b3;
-  }
-  
-  .room-control span {
-    font-weight: bold;
-    font-size: 16px;
-  }  
+}

@@ -22,9 +22,14 @@ import ViewFlightAdmin from './components/ViewFlightAdmin';
 import CabAdmin from './components/CabAdmin'
 import AddCab from './components/AddCab'
 import Cabs from './components/Cabs';
+import Profile from './components/Profile';
+import Status from './components/Status';
+import AdminCab from './components/AdminCab';
+import CabDetails from './components/CabDetails';
+
 
 function App() {
-  const hiddenNavRoutes = ['/hoteldashboard', '/flightdashboard','/cabdashboard'];
+  const hiddenNavRoutes = ['/hoteldashboard', '/flightdashboard','/cabdashboard','/profile'];
 
   const defaultHotels = [
     {
@@ -35,8 +40,6 @@ function App() {
       stars: 5,
       image: hotelImage,
       availableRooms: 20,
-      bedType: 'King Size',
-      acType: 'AC',
       description: 'An opulent stay in the heart of New York, offering world-class services and facilities.',
     },
     {
@@ -47,8 +50,6 @@ function App() {
       stars: 4,
       image: hotelImage1,
       availableRooms: 30,
-      bedType: 'Double Bed',
-      acType: 'AC',
       description: 'A serene beachfront resort where you can relax and unwind by the sea.',
     },
     {
@@ -59,8 +60,6 @@ function App() {
       stars: 3,
       image: hotelImage2,
       availableRooms: 15,
-      bedType: 'Single Bed',
-      acType: 'Non-AC',
       description: 'A budget-friendly stay with breathtaking views of the Alps and easy access to ski resorts.',
     },
     {
@@ -71,8 +70,6 @@ function App() {
       stars: 5,
       image: hotelImage3,
       availableRooms: 10,
-      bedType: 'Queen Size',
-      acType: 'AC',
       description: 'A modern, luxury hotel located in the heart of Tokyo, offering panoramic city views.',
     },
   ];
@@ -105,12 +102,30 @@ function App() {
     ];
   });
 
+  // Update localStorage whenever flight data changes
   useEffect(() => {
     localStorage.setItem('flightData', JSON.stringify(flightData));
   }, [flightData]);
 
+  // Function to handle adding a new flight
   const handleAddFlight = (newFlight) => {
     setFlightData((prevData) => [...prevData, newFlight]);
+  };
+
+  // Function to update available seats
+  const handleUpdateSeats = (flightNumber, type) => {
+    const updatedFlights = flightData.map((flight) =>
+      flight.flightNumber === flightNumber
+        ? {
+            ...flight,
+            availableSeats:
+              type === 'increment'
+                ? flight.availableSeats + 1
+                : Math.max(0, flight.availableSeats - 1),
+          }
+        : flight
+    );
+    setFlightData(updatedFlights);
   };
 
   const [hotelsData, setHotelsData] = useState(() => {
@@ -130,19 +145,39 @@ function App() {
     setHotelsData(updatedHotels);
   };
 
-  const handleUpdateRooms = (id, type) => {
-    const updatedHotels = hotelsData.map((hotel) =>
-      hotel.id === id
-        ? {
-            ...hotel,
-            availableRooms: type === 'increment'
-              ? hotel.availableRooms + 1
-              : Math.max(0, hotel.availableRooms - 1),
-          }
-        : hotel
-    );
+  const handleUpdateRooms = (id, type, bedType = null) => {
+    const updatedHotels = hotelsData.map((hotel) => {
+      if (hotel.id !== id) return hotel;
+  
+      // Update bed count for a specific bedType, if provided
+      const updatedBedDetails = bedType
+        ? hotel.bedDetails.map((bed) =>
+            bed.bedType === bedType
+              ? {
+                  ...bed,
+                  count: type === 'increment'
+                    ? bed.count + 1
+                    : Math.max(0, bed.count - 1),
+                }
+              : bed
+          )
+        : hotel.bedDetails;
+  
+      // Update availableRooms
+      const updatedAvailableRooms =
+        type === 'increment'
+          ? hotel.availableRooms + 1
+          : Math.max(0, hotel.availableRooms - 1);
+  
+      return {
+        ...hotel,
+        availableRooms: updatedAvailableRooms,
+        bedDetails: updatedBedDetails,
+      };
+    });
+  
     setHotelsData(updatedHotels);
-  };
+  };  
 
   const handleBookRooms = (id, roomsToBook) => {
     const updatedHotels = hotelsData.map((hotel) =>
@@ -154,21 +189,6 @@ function App() {
         : hotel
     );
     setHotelsData(updatedHotels);
-  };
-
-  const handleUpdateSeats = (flightNumber, type) => {
-    const updatedFlights = flightData.map((flight) =>
-      flight.flightNumber === flightNumber
-        ? {
-            ...flight,
-            availableSeats:
-              type === 'increment'
-                ? flight.availableSeats + 1
-                : Math.max(0, flight.availableSeats - 1),
-          }
-        : flight
-    );
-    setFlightData(updatedFlights);
   };
   const [cabsData, setCabsData] = useState(() => {
     const storedCabs = localStorage.getItem('cabsData');
@@ -182,6 +202,14 @@ function App() {
   const handleAddCab = (newCab) => {
     setCabsData((prevData) => [...prevData, newCab]);
   };
+  const onToggleAvailability = (cabId) => {
+    const updatedCabs = cabsData.map((cab) =>
+      cab.id === cabId ? { ...cab, available: !cab.available } : cab
+    );
+    setCabsData(updatedCabs);
+  };
+  
+  
 
   return (
     <Router>
@@ -196,6 +224,7 @@ function App() {
         onUpdateSeats={handleUpdateSeats} // ✅ pass this prop
         onAddCab={handleAddCab}
         cabsData={cabsData}  /* Add this line */
+        onToggleAvailability={onToggleAvailability}
       />
     </Router>
   );
@@ -212,6 +241,7 @@ function RouteHandler({
   onUpdateSeats,
   onAddCab,
   cabsData, // Add cabsData here
+  onToggleAvailability
 }) {
   const location = useLocation();
   const isNavVisible = !hiddenNavRoutes.includes(location.pathname);
@@ -229,13 +259,18 @@ function RouteHandler({
         <Route path="/hotels" element={<Hotels hotelsData={hotelsData} />} />
         <Route path="/hotels/:id" element={<HotelDetail hotelsData={hotelsData} onBookRooms={onBookRooms} />} />
         <Route path="/viewhotels" element={<ViewHotelAdmin adminHotelsData={hotelsData} onUpdateRooms={onUpdateRooms} />} />
-        <Route path="/payment" element={<Payment />} />
         <Route path="/addflight" element={<AddFlight onAddFlight={onAddFlight} />} /> {/* Pass onAddFlight to AddFlight */}
         <Route path="/flights" element={<Flights flights={flightData} />} />
-        <Route path="/viewflights" element={<ViewFlightAdmin adminFlightsData={flightData} onUpdateSeats={onUpdateSeats} />} />
         <Route path="/cabdashboard" element={<CabAdmin />}/>
         <Route path="/addcabs" element={<AddCab onAddCab={onAddCab} />} />
         <Route path="/cabs" element={<Cabs cabsData={cabsData} />} />
+        <Route path="/profile" element={<Profile />}/>
+        <Route path="/status" element={<Status />}/>
+        <Route path="/viewcabs" element={<AdminCab adminCabsData={cabsData} onToggleAvailability={onToggleAvailability} />} />
+        <Route path="/cab/:id" element={<CabDetails />} /> 
+        <Route path="/viewflights" element={<ViewFlightAdmin flights={flightData} />} />
+
+
       </Routes>
     </>
   );

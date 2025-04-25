@@ -1,64 +1,74 @@
 .admin-container {
-    display: flex;
-    justify-content: center;
-    padding: 2rem 1rem;
-    background-color: #f9f9f9;
-  }
-  
-  .form-card {
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    width: 100%;
-    max-width: 500px;
-  }
-  
-  .form-card h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.6rem;
-    color: #333;
-  }
-  
-  .form-card form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-card label {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #555;
-  }
-  
-  .form-card input {
-    padding: 0.7rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 1.2rem;
-    font-size: 1rem;
-    transition: border-color 0.2s ease;
-  }
-  
-  .form-card input:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  .form-card button {
-    padding: 0.9rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .form-card button:hover {
-    background-color: #0056b3;
-  }  
-  
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f7f7f7;
+  min-height: 100vh;
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.form-card form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  margin-top: 1rem;
+  color: #444;
+}
+
+.form-card input,
+.form-card select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+  border-color: #0077ff;
+  box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.1);
+}
+
+.room-detail {
+  background-color: #f0f4f8;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #0077ff;
+}
+
+button[type="submit"],
+button[type="button"] {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+  background-color: #005fd1;
+}

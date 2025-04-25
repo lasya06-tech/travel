@@ -9,7 +9,7 @@ const FlightAdmin = () => {
         <div className="logo">Travel</div>
         <ul className="nav-links">
           <li><Link to="/addcabs">Add Cab</Link></li>
-          <li><Link to="/viewflights">View Cabs</Link></li>
+          <li><Link to="/viewcabs">View Cabs</Link></li>
           <li><Link to="/hotel/viewproduct">Customer Feedback</Link></li>
         </ul>
       </nav>

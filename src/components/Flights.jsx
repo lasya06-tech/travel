@@ -3,12 +3,13 @@ import './Flights.css';
 import { useNavigate } from 'react-router-dom';
 
 const Flights = ({ flights }) => {
-    const navigate = useNavigate(); // ✅ hook to navigate
+  const navigate = useNavigate();
   const [search, setSearch] = useState({
     from: '',
     to: '',
-    departureTime: '',
-    arrivalTime: ''
+    departureDate: '',
+    returnDate: '',
+    tripType: 'one-way',
   });
 
   const [flightData, setFlightData] = useState(flights);
@@ -19,25 +20,44 @@ const Flights = ({ flights }) => {
 
   const handleBooking = (index, seatsToBook) => {
     const seatNum = parseInt(seatsToBook, 10);
-    if (isNaN(seatNum) || seatNum <= 0) return alert("Enter a valid seat number");
+    if (isNaN(seatNum) || seatNum <= 0) {
+      alert("Enter a valid seat number");
+      return;
+    }
 
     const updatedFlights = [...flightData];
     if (updatedFlights[index].availableSeats >= seatNum) {
       updatedFlights[index].availableSeats -= seatNum;
       setFlightData(updatedFlights);
+
+      const bookingDetails = {
+        flight: updatedFlights[index],
+        seatsBooked: seatNum,
+        totalAmount: seatNum * 5000, // Assume a fixed amount per seat
+      };
+
+      // Store the booking details in localStorage
+      localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails));
+
       alert(`Successfully booked ${seatNum} seat(s) on ${updatedFlights[index].flightNumber}`);
-      navigate('/payment'); // ✅ Navigate to payment
+      navigate('/payment');
     } else {
       alert('Not enough seats available!');
     }
   };
 
+  // Filter flights based on search criteria with safe date comparison
   const filteredFlights = flightData.filter((flight) => {
+    const dep = flight.departureTime ? flight.departureTime.slice(0, 10) : '';
+    const arr = flight.arrivalTime ? flight.arrivalTime.slice(0, 10) : '';
+
     return (
       (search.from === '' || flight.from === search.from) &&
       (search.to === '' || flight.to === search.to) &&
-      (search.departureTime === '' || flight.departureTime >= search.departureTime) &&
-      (search.arrivalTime === '' || flight.arrivalTime <= search.arrivalTime)
+      (search.departureDate === '' || dep >= search.departureDate) &&
+      (search.tripType === 'round-trip'
+        ? search.returnDate && arr <= search.returnDate
+        : true)
     );
   });
 
@@ -59,8 +79,26 @@ const Flights = ({ flights }) => {
           <option value="BLR">Bangalore (BLR)</option>
         </select>
 
-        <input type="time" name="departureTime" value={search.departureTime} onChange={handleChange} />
-        <input type="time" name="arrivalTime" value={search.arrivalTime} onChange={handleChange} />
+        <select name="tripType" value={search.tripType} onChange={handleChange}>
+          <option value="one-way">One Way</option>
+          <option value="round-trip">Round Trip</option>
+        </select>
+
+        <input 
+          type="date" 
+          name="departureDate" 
+          value={search.departureDate} 
+          onChange={handleChange} 
+        />
+
+        {search.tripType === 'round-trip' && (
+          <input 
+            type="date" 
+            name="returnDate" 
+            value={search.returnDate} 
+            onChange={handleChange} 
+          />
+        )}
       </div>
 
       <div className="flight-list">
@@ -71,7 +109,7 @@ const Flights = ({ flights }) => {
               <p>From: {flight.from} | To: {flight.to}</p>
               <p>Departure: {flight.departureTime} | Arrival: {flight.arrivalTime}</p>
               <p>Duration: {flight.duration}</p>
-              <p>Remarks: {flight.remarks}</p>
+              <p>Remarks: {search.tripType === 'round-trip' ? 'Round-trip available' : 'One-way flight'}</p>
               <p>Available Seats: {flight.availableSeats}</p>
 
               <div className="booking-form">

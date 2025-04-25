@@ -1,0 +1,32 @@
+/* AdminCab.css */
+.admin-cabs {
+    padding: 20px;
+  }
+  
+  .cabs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .cab-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .cab-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .cab-info {
+    margin-top: 10px;
+  }
+  
+  .cab-info p {
+    margin: 5px 0;
+  }  

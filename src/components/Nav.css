@@ -19,6 +19,7 @@
 .nav-links {
   display: flex;
   gap: 20px;
+  align-items: center; /* Align items vertically in the nav-links section */
 }
 
 .nav-links a {
@@ -32,3 +33,35 @@
   color: #ffcc00;
 }
 
+/* For the username and logout button */
+.nav-links span {
+  font-size: 14px;
+  margin-right: 10px; /* Add space between the username and logout button */
+}
+
+.nav-links button {
+  background-color: #ffcc00;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #004080;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.nav-links button:hover {
+  background-color: #e6b800;
+}
+.username-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.username-link:hover {
+  color: #ffd700;
+}
